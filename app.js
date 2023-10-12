@@ -102,18 +102,19 @@ app.get('/purchases', function (req, res) {
     if (product) {
          conditions.push(product);
         let productArr = product.split(',');
-        let values = values.map((a) => {
+        let values = productArr.map((a) => {
                     let val = a.substring(2);
                     return val;
                 });
-        let productQuery = values.map((a) => `productId = ${+a} `);
+        let productQuery = values.map((a) => `productid = ${+a} `);
         sql2 = sql2 + productQuery.join(' OR ');  
         //console.log(sql2);
     }
     if (shop) {
         conditions.push(shop);
         let shop1 = shop.substring(2);
-        sql2 = sql2 + (product ? ' AND ' : '') + ` shopId=${+shop1}`;
+        sql2 = sql2 + (product ? ' AND ' : '') + ` shopid=${+shop1}`;
+        //console.log(shop1,sql2);
     }
     if (sort) {
         conditions.push(sort);
